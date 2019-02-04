@@ -34,8 +34,10 @@ dependencies {
     implementation 'org.flywaydb:flyway-core'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation "org.jetbrains.kotlin:kotlin-reflect"
+    compile group: 'org.springframework', name: 'springloaded', version: '1.2.8.RELEASE'
     compile group: 'org.seasar.doma.boot', name: 'doma-spring-boot-starter', version: '1.1.1'
-    compile group: 'org.webjars', name: 'AdminLTE', version: '2.4.3'
+    compile group: 'org.webjars', name: 'bootstrap', version: '3.3.7-1'
+    compile group: 'org.webjars', name: 'jquery', version: '3.3.1-1'
 
     runtimeOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2'
