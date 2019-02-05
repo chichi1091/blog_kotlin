@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank
 
 class LoginModel {
     @NotBlank
-    val username: String = ""
+    var username: String = ""
     @NotBlank
-    val password: String = ""
+    var password: String = ""
 }
