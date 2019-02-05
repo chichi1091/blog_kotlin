@@ -2,6 +2,7 @@ package com.example.blog.web
 
 import com.example.blog.model.LoginModel
 import com.example.blog.repository.UserRepository
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping
 @Controller
 class LoginController(
         private val userRepository: UserRepository
+        , private val passwordEncoder: PasswordEncoder
 ) {
     @GetMapping("/")
     fun index(model: Model): String {
@@ -30,7 +32,8 @@ class LoginController(
             return "login"
         }
 
-        var userOptional = userRepository.selectLoginUser(form.username, form.password)
+        var digest = passwordEncoder.encode(form.password)
+        var userOptional = userRepository.selectLoginUser(form.username, digest)
 
         return "redirect:/home/"
     }
