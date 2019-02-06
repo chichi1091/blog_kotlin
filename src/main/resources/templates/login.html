@@ -41,6 +41,11 @@
     <!-- contents -->
     <div class="row">
         <div class="col-xs-4 col-xs-offset-4">
+            <p th:if="${isError}" style="color: red">usernameまたはpasswordに誤りがあります</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-4">
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">

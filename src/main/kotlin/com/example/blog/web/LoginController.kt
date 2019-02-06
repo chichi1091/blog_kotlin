@@ -34,8 +34,12 @@ class LoginController(
 
         var digest = passwordEncoder.encode(form.password)
         var userOptional = userRepository.selectLoginUser(form.username, digest)
+        if(userOptional.isPresent()) {
+            return "redirect:/home/"
+        }
 
-        return "redirect:/home/"
+        model.addAttribute("isError", true)
+        return "login"
     }
 }
 
