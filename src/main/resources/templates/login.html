@@ -28,10 +28,7 @@
                 </div>
                 <div th:unless="${isAuth}">
                     <li>
-                        <a href="/login">Login</a>
-                    </li>
-                    <li>
-                        <a href="/register">Register</a>
+                        <a th:href="@{'/register'}">Register</a>
                     </li>
                 </div>
             </ul>
@@ -72,9 +69,9 @@
     </div>
 
     <!-- footer -->
-    <footer>
-        <hr />
-        <div align="center">footer</div>
-</footer>
+    <!--<footer>-->
+        <!--<hr />-->
+        <!--<div align="center">footer</div>-->
+    <!--</footer>-->
 </body>
 </html>
