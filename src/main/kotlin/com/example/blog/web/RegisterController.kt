@@ -11,11 +11,13 @@ import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
+import javax.servlet.http.HttpSession
 
 @Controller
 class RegisterController(
         private val userRepository: UserRepository
         , private val passwordEncoder: PasswordEncoder
+        , private val session: HttpSession
 ) {
     @GetMapping("/register")
     fun index(model: Model): String {
@@ -34,8 +36,11 @@ class RegisterController(
         val digest = passwordEncoder.encode(form.password)
         val user = UserEntity(null, form.username, form.email, digest)
 
-        return if(userRepository.insert(user).count == 1) "redirect:/home/"
-        else {
+        val result = userRepository.insert(user)
+        return if(result.count == 1) {
+            session.setAttribute("userInfo", result.entity)
+            "redirect:/home/"
+        } else {
             model.addAttribute("appName", "Kotlin Blog")
             "register"
         }

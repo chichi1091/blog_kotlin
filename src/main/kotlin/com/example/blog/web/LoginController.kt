@@ -10,11 +10,13 @@ import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
+import javax.servlet.http.HttpSession
 
 @Controller
 class LoginController(
         private val userRepository: UserRepository
         , private val passwordEncoder: PasswordEncoder
+        , private val session: HttpSession
 ) {
     @GetMapping("/")
     fun index(model: Model): String {
@@ -35,8 +37,10 @@ class LoginController(
         val digest = passwordEncoder.encode(form.password)
         val userOptional = userRepository.selectLoginUser(form.username, digest)
 
-        return if(userOptional.isPresent()) return "redirect:/home/"
-        else {
+        return if(userOptional.isPresent()) {
+            session.setAttribute("userInfo", userOptional.get())
+            return "redirect:/home/"
+        } else {
             model.addAttribute("isError", true)
             "login"
         }
