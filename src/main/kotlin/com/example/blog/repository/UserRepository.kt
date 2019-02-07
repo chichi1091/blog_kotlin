@@ -6,6 +6,6 @@ import java.util.*
 
 interface UserRepository {
     fun selectAll(): List<UserEntity>
-    fun selectLoginUser(username: String, password: String): Optional<UserEntity>
+    fun selectLoginUser(username: String): Optional<UserEntity>
     fun insert(user: UserEntity): Result<UserEntity>
 }

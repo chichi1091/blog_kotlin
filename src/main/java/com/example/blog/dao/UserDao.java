@@ -17,7 +17,7 @@ public interface UserDao {
     List<UserEntity> selectAll();
 
     @Select
-    Optional<UserEntity> selectLoginUser(String username, String password);
+    Optional<UserEntity> selectLoginUser(String username);
 
     @Insert(excludeNull = true)
     Result<UserEntity> insert(UserEntity user);

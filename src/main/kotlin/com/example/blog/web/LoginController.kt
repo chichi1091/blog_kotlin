@@ -34,12 +34,17 @@ class LoginController(
             return "login"
         }
 
-        val digest = passwordEncoder.encode(form.password)
-        val userOptional = userRepository.selectLoginUser(form.username, digest)
+        val userOptional = userRepository.selectLoginUser(form.username)
 
         return if(userOptional.isPresent()) {
-            session.setAttribute("userInfo", userOptional.get())
-            return "redirect:/home/"
+            val password = userOptional.get().password
+            return if(passwordEncoder.matches(form.password, password)) {
+                session.setAttribute("userInfo", userOptional.get())
+                "redirect:/home/"
+            } else {
+                model.addAttribute("isError", true)
+                "login"
+            }
         } else {
             model.addAttribute("isError", true)
             "login"

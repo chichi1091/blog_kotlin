@@ -19,7 +19,7 @@ class UserRepositoryImpl(
         return userDao.selectAll()
     }
 
-    override fun selectLoginUser(username: String, password: String): Optional<UserEntity> {
-        return userDao.selectLoginUser(username, password)
+    override fun selectLoginUser(username: String): Optional<UserEntity> {
+        return userDao.selectLoginUser(username)
     }
 }
