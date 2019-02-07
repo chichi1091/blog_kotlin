@@ -3,7 +3,7 @@ select
 from
     users
 where
-  email = /* email */'hoge@gmail.com'
+  name = /* username */'hoge'
   and password = /* password */'password'
 order by
     id desc

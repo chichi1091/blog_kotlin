@@ -32,14 +32,14 @@ class LoginController(
             return "login"
         }
 
-        var digest = passwordEncoder.encode(form.password)
-        var userOptional = userRepository.selectLoginUser(form.username, digest)
-        if(userOptional.isPresent()) {
-            return "redirect:/home/"
-        }
+        val digest = passwordEncoder.encode(form.password)
+        val userOptional = userRepository.selectLoginUser(form.username, digest)
 
-        model.addAttribute("isError", true)
-        return "login"
+        return if(userOptional.isPresent()) return "redirect:/home/"
+        else {
+            model.addAttribute("isError", true)
+            "login"
+        }
     }
 }
 

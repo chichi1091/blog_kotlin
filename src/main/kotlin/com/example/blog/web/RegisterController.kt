@@ -1,5 +1,6 @@
 package com.example.blog.web
 
+import com.example.blog.entity.UserEntity
 import com.example.blog.model.RegisterModel
 import com.example.blog.repository.UserRepository
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -30,6 +31,13 @@ class RegisterController(
             return "register"
         }
 
-        return "redirect:/home/"
+        val digest = passwordEncoder.encode(form.password)
+        val user = UserEntity(null, form.username, form.email, digest)
+
+        return if(userRepository.insert(user).count == 1) "redirect:/home/"
+        else {
+            model.addAttribute("appName", "Kotlin Blog")
+            "register"
+        }
     }
 }
