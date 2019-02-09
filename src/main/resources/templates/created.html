@@ -27,7 +27,7 @@
             </div>
             <div th:unless="${isAuth}">
                 <li>
-                    <a th:href="@{'register'}">Register</a>
+                    <a th:href="@{'/register'}">Register</a>
                 </li>
             </div>
         </ul>
@@ -35,36 +35,28 @@
 </nav>
 
 <!-- contents -->
-<div class="row">
-    <div class="col-xs-8 col-xs-offset-2">
-        <div class="panel panel-default">
-            <div class="panel-heading">Blog List</div>
-            <div class="panel-body">
-                <div th:if="${blogs}">
-                    <span>登録されていません</span>
+<div class="col-xs-4 col-xs-offset-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">Register</div>
+        <div class="panel-body">
+            <form th:action="@{/blog/register}" th:object="${form}" method="POST">
+                <div class="form-group">
+                    <label for="title">タイトル</label>
+                    <input type="text" th:field="*{title}" class="form-control" />
+                    <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color: red"></p>
                 </div>
 
-                <div th:unless="${blogs}">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Created User Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="blog : ${blogs}">
-                                <td th:text="${blog.title}"></td>
-                                <td th:text="${blog.username}"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="form-group">
+                    <label for="body">本文</label>
+                    <textarea th:field="*{body}" class="form-control"></textarea>
+                    <p th:if="${#fields.hasErrors('body')}" th:errors="*{body}" style="color: red"></p>
                 </div>
 
                 <div class="form-group text-center">
-                    <a th:href="@{'/blog/register'}" class="btn btn-success">作成</a>
+                    <button type="submit" class="btn btn-success">登録</button>
+                    <a th:href="@{'/home'}" class="btn">戻る</a>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
