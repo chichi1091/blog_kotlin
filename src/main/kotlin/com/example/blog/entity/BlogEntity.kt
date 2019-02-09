@@ -14,5 +14,6 @@ class BlogEntity(
         , val userId: Int
         , val body: String
         , val createDatetime: Date
-        , val name: String
+        , @Column(insertable = false, updatable = false)
+        val name: String
 )
