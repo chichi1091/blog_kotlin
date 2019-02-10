@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository
 class BlogRepositoryImpl(
         private val blogDao: BlogDao
 ): BlogRepository {
+    override fun selectId(id: Int): BlogEntity {
+        return blogDao.selectId(id)
+    }
 
     override fun insert(entity: BlogEntity): Result<BlogEntity> {
         return blogDao.insert(entity)

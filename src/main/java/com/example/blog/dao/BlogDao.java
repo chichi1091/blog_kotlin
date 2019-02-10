@@ -13,6 +13,9 @@ import java.util.List;
 @Dao
 public interface BlogDao {
     @Select
+    BlogEntity selectId(int id);
+
+    @Select
     List<BlogEntity> selectAll();
 
     @Insert(excludeNull = true)

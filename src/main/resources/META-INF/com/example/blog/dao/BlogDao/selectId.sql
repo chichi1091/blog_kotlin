@@ -3,5 +3,5 @@ select
 from
     blogs b inner join users u on
       b.user_id = u.id
-order by
-    b.id desc
+where
+    b.id = /*id*/1

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns           ="http://www.w3.org/1999/xhtml"
+      xmlns:th        ="http://www.thymeleaf.org"
+      xmlns:layout    ="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>thymeleaf base</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"/>
+
+    <script th:src="@{/webjars/jquery/3.3.1-1/jquery.min.js}"></script>
+</head>
+<body>
+<!-- header -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/home" th:text="${appName}"></a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <div th:if="${isAuth}">
+                <li>
+                    <a href="/logout">Logout</a>
+                </li>
+            </div>
+            <div th:unless="${isAuth}">
+                <li>
+                    <a th:href="@{'/register'}">Register</a>
+                </li>
+            </div>
+        </ul>
+    </div>
+</nav>
+
+<!-- contents -->
+<div class="col-xs-4 col-xs-offset-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">Edit</div>
+        <div class="panel-body">
+            <form th:action="@{/blog/edit}" th:object="${form}" method="POST">
+                <div class="form-group">
+                    <label for="title">タイトル</label>
+                    <input type="text" th:field="*{title}" class="form-control" />
+                    <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color: red"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="body">本文</label>
+                    <textarea th:field="*{body}" class="form-control"></textarea>
+                    <p th:if="${#fields.hasErrors('body')}" th:errors="*{body}" style="color: red"></p>
+                </div>
+
+                <div class="form-group text-center">
+                    <hidden th:filed="*{id}" />
+                    <button type="submit" class="btn btn-success">更新</button>
+                    <a th:href="@{'/home'}" class="btn">戻る</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- footer -->
+<!--<footer>-->
+<!--<hr />-->
+<!--<div align="center">footer</div>-->
+<!--</footer>-->
+</body>
+</html>
