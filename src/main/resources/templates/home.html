@@ -50,12 +50,17 @@
                             <tr>
                                 <th>Title</th>
                                 <th>Created User Name</th>
+                                <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="blog : ${blogs}">
                                 <td th:text="${blog.title}"></td>
                                 <td th:text="${blog.name}"></td>
+                                <td>
+                                    <a th:href="@{'/blog/edit/' + ${blog.id}}" class="btn btn-warning">編集</a>
+                                    <a th:href="@{'/blog/delete/' + ${blog.id}}" class="btn btn-danger">削除</a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
