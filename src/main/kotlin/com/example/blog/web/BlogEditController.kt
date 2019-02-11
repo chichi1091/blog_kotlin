@@ -6,10 +6,9 @@ import com.example.blog.model.BlogModel
 import com.example.blog.repository.BlogRepository
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.validation.annotation.Validated
+import org.springframework.web.bind.annotation.*
+import java.util.*
 import javax.servlet.http.HttpSession
 
 @Controller
@@ -35,7 +34,10 @@ class BlogEditController(
     }
 
     @PostMapping("edit")
-    fun edit(): String {
+    fun edit(@ModelAttribute("form") @Validated form: BlogModel, model:Model): String {
+        val user: UserEntity = session.getAttribute("userInfo") as UserEntity? ?: throw Exception("session timeout")
+        var entity = BlogEntity(form.id, form.title, user.id!!, form.body, Date(), user.name)
+        blogRepository.update(entity)
         return "redirect:/home/"
     }
 }
