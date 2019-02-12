@@ -40,11 +40,11 @@
         <div class="panel panel-default">
             <div class="panel-heading">Blog List</div>
             <div class="panel-body">
-                <div th:unless="${blogs}">
+                <div th:if="${blogs.size() == 0}">
                     <span>登録されていません</span>
                 </div>
 
-                <div th:if="${blogs}">
+                <div th:if="${blogs.size() > 0}">
                     <table class="table">
                         <thead>
                             <tr>
