@@ -8,4 +8,5 @@ interface BlogRepository {
     fun selectAll(): List<BlogEntity>
     fun insert(entity: BlogEntity): Result<BlogEntity>
     fun update(entity: BlogEntity): Result<BlogEntity>
+    fun delete(entity: BlogEntity): Result<BlogEntity>
 }

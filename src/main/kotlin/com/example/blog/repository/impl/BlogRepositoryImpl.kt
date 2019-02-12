@@ -10,6 +10,10 @@ import org.springframework.stereotype.Repository
 class BlogRepositoryImpl(
         private val blogDao: BlogDao
 ): BlogRepository {
+    override fun delete(entity: BlogEntity): Result<BlogEntity> {
+        return blogDao.delete(entity)
+    }
+
     override fun update(entity: BlogEntity): Result<BlogEntity> {
         return blogDao.update(entity)
     }

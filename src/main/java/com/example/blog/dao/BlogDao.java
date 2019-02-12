@@ -1,10 +1,7 @@
 package com.example.blog.dao;
 
 import com.example.blog.entity.BlogEntity;
-import org.seasar.doma.Dao;
-import org.seasar.doma.Insert;
-import org.seasar.doma.Select;
-import org.seasar.doma.Update;
+import org.seasar.doma.*;
 import org.seasar.doma.boot.ConfigAutowireable;
 import org.seasar.doma.jdbc.Result;
 
@@ -24,4 +21,7 @@ public interface BlogDao {
 
     @Update(excludeNull = true)
     Result<BlogEntity> update(BlogEntity entity);
+
+    @Delete
+    Result<BlogEntity> delete(BlogEntity entity);
 }
